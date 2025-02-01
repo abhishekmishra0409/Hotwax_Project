@@ -1,10 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cors = require('cors');
+
 const connection = require('./config/db');
 const userRouter = require('./route/userRoute');
 const orderRouter = require('./route/orderRoute');
 const productRouter = require('./route/productRoute');
+const contactRouter = require('./route/contactRoute');
+
 
 
 dotenv.config();
@@ -14,6 +18,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
@@ -22,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 app.use('/api/v1/user',userRouter)
 app.use('/api/v1/orders',orderRouter)
 app.use('/api/v1/products',productRouter)
-
+app.use('/api/v1/contacts',contactRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

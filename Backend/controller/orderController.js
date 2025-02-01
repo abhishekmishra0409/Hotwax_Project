@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 // Create an Order
-exports.createOrder = async (req, res) => {
+const createOrder = async (req, res) => {
     try {
         const { order_date, shipping_contact_mech_id, billing_contact_mech_id, order_item } = req.body;
         const customer_id = req.customer_id;
@@ -30,7 +30,7 @@ exports.createOrder = async (req, res) => {
 };
 
 // Retrieve Order Details
-exports.getOrderDetails = async (req, res) => {
+const getOrderDetails = async (req, res) => {
     try {
         const { order_id } = req.params;
         const customer_id = req.customer_id;
@@ -52,7 +52,7 @@ exports.getOrderDetails = async (req, res) => {
 };
 
 // Update an Order
-exports.updateOrder = async (req, res) => {
+const updateOrder = async (req, res) => {
     try {
         const { order_id } = req.params;
         const customer_id = req.customer_id;
@@ -72,7 +72,7 @@ exports.updateOrder = async (req, res) => {
 };
 
 // Delete an Order
-exports.deleteOrder = async (req, res) => {
+const deleteOrder = async (req, res) => {
     try {
         const { order_id } = req.params;
         const customer_id = req.customer_id;
@@ -91,7 +91,7 @@ exports.deleteOrder = async (req, res) => {
 };
 
 //  Add an Order Item
-exports.addOrderItem = async (req, res) => {
+const addOrderItem = async (req, res) => {
     try {
         const { order_id } = req.params;
         const { product_id, quantity, status } = req.body;
@@ -106,7 +106,7 @@ exports.addOrderItem = async (req, res) => {
 };
 
 // Update an Order Item
-exports.updateOrderItem = async (req, res) => {
+const updateOrderItem = async (req, res) => {
     try {
         const { order_id, order_item_seq_id } = req.params;
         const { quantity, status } = req.body;
@@ -125,7 +125,7 @@ exports.updateOrderItem = async (req, res) => {
 };
 
 // Delete an Order Item
-exports.deleteOrderItem = async (req, res) => {
+const deleteOrderItem = async (req, res) => {
     try {
         const { order_id, order_item_seq_id } = req.params;
 
@@ -141,3 +141,13 @@ exports.deleteOrderItem = async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 };
+
+module.exports = {
+    createOrder,
+    getOrderDetails,
+    updateOrder,
+    deleteOrder,
+    addOrderItem,
+    updateOrderItem,
+    deleteOrderItem
+}
